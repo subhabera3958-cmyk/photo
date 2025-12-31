@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Debjani 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:radial-gradient(circle,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    overflow:hidden;
+}
+
+.card{
+    background:rgba(255,255,255,0.95);
+    width:400px;
+    padding:30px;
+    border-radius:30px;
+    text-align:center;
+    box-shadow:0 25px 45px rgba(0,0,0,0.25);
+    z-index:10;
+}
+
+h1{color:#ff3b6f;}
+h2{color:#ff6f91;}
+
+.name{
+    font-size:24px;
+    color:#ff3b6f;
+    font-weight:bold;
+}
+
+/* PHOTO STYLE */
+.photo{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #ff3b6f;
+    margin:15px auto;
+    animation:photoGlow 2s infinite alternate;
+}
+
+@keyframes photoGlow{
+    from{box-shadow:0 0 10px #ff6f91;}
+    to{box-shadow:0 0 25px #ff1744;}
+}
+
+.countdown{
+    font-size:28px;
+    color:#ff1744;
+    margin:15px 0;
+    font-weight:bold;
+}
+
+.heart{
+    font-size:42px;
+    animation:beat 1s infinite;
+}
+
+@keyframes beat{
+    50%{transform:scale(1.3);}
+}
+
+.type-line{
+    opacity:0;
+    font-size:16px;
+    color:#555;
+    margin:8px 0;
+}
+
+.type-title{
+    font-size:18px;
+    font-weight:bold;
+    color:#ff3b6f;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    border:none;
+    border-radius:25px;
+    background:#ff3b6f;
+    color:white;
+    cursor:pointer;
+}
+
+.hidden{display:none;}
+
+.footer{
+    margin-top:15px;
+    font-size:14px;
+    color:#888;
+}
+
+/* Floating hearts */
+.floating-heart{
+    position:absolute;
+    bottom:-20px;
+    font-size:22px;
+    animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+/* Fireworks */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:pink;
+    border-radius:50%;
+    animation:explode 1s forwards;
+}
+
+@keyframes explode{
+    to{transform:scale(6);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+    <h1 id="title">⏳ New Year Countdown</h1>
+    <h2>For My Love 💕</h2>
+
+    <div class="name">Debjani Bera 💖</div>
+
+    <!-- YOUR PHOTO -->
+    <img src="deb.jpg" alt="My Love" class="photo">
+
+    <div class="countdown" id="countdown"></div>
+
+    <div id="newYear" class="hidden">
+        <div class="heart">❤️</div>
+
+        <div id="message">
+            <div class="type-line type-title">💌 Happy New Year My Love 💌</div>
+            <div class="type-line">এই নতুন বছরটা তোমার হাত ধরে শুরু করতে চাই ❤️</div>
+            <div class="type-line">You are not just my girlfriend, you are my smile, my peace, my forever 💫</div>
+            <div class="type-line">পুরনো কষ্টগুলোকে goodbye 👋</div>
+            <div class="type-line">আর নতুন বছরটা ভরে যাক love, hugs, kisses & endless happiness 🥰</div>
+            <div class="type-line">May this year bring us more memories, more laughter, and more reasons to fall in love again and again 💕</div>
+            <div class="type-line type-title">Happy New Year 2026, my jaan 💖</div>
+            <div class="type-line type-title">Forever yours ❤️</div>
+        </div>
+
+        <button onclick="showSecret()">💌 One More Surprise</button>
+        <p id="secret" class="hidden" style="color:#ff3b6f;">
+            I will choose you today, tomorrow & forever 🥰
+        </p>
+    </div>
+
+    <div class="footer">— From Subha 💖</div>
+</div>
+
+<script>
+function nextMidnight(){
+    const d=new Date();
+    d.setHours(24,0,0,0);
+    return d;
+}
+
+const cd=document.getElementById("countdown");
+const ny=document.getElementById("newYear");
+const title=document.getElementById("title");
+
+setInterval(()=>{
+    const diff=nextMidnight()-new Date();
+    if(diff<=0){
+        title.innerHTML="🎆 Happy New Year 🎆";
+        cd.style.display="none";
+        ny.classList.remove("hidden");
+        fireworks();
+        startTypewriter();
+        return;
+    }
+    const h=Math.floor(diff/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    cd.innerHTML=`${h}h : ${m}m : ${s}s`;
+},1000);
+
+function showSecret(){
+    document.getElementById("secret").classList.remove("hidden");
+}
+
+function heartFloat(){
+    const h=document.createElement("div");
+    h.className="floating-heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+}
+setInterval(heartFloat,400);
+
+function fireworks(){
+    setInterval(()=>{
+        const f=document.createElement("div");
+        f.className="firework";
+        f.style.left=Math.random()*100+"vw";
+        f.style.top=Math.random()*100+"vh";
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+    },200);
+}
+
+function startTypewriter(){
+    const lines=document.querySelectorAll(".type-line");
+    let i=0;
+
+    function typeLine(){
+        if(i>=lines.length) return;
+        const el=lines[i];
+        const text=el.innerText;
+        el.innerText="";
+        el.style.opacity=1;
+        let j=0;
+
+        const t=setInterval(()=>{
+            el.innerText+=text.charAt(j);
+            j++;
+            if(j>=text.length){
+                clearInterval(t);
+                i++;
+                setTimeout(typeLine,400);
+            }
+        },40);
+    }
+    typeLine();
+}
+</script>
+
+</body>
+</html>
